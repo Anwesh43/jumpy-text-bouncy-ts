@@ -198,3 +198,25 @@ class JumpyBouncyText {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    jbt : JumpyBouncyText = new JumpyBouncyText()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.jbt.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.jbt.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.jbt.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
