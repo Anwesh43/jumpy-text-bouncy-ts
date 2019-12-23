@@ -2,7 +2,7 @@ const w : number = window.innerWidth
 const h : number = window.innerHeight
 const scGap : number = 0.005
 const text : string = "hello"
-const nodes : number = 1
+const nodes : number = 5
 const foreColor : string = "teal"
 const backColor : string = "#bdbdbd"
 const delay : number = 30
@@ -36,10 +36,11 @@ class DrawingUtil {
             const ch : string =  `${text.charAt(i)}`
             const chw = context.measureText(ch).width
             context.save()
-            context.translate(0, -gap * sci)
+            context.translate(x, -gap * sci)
             context.rotate(Math.PI * sci)
-            context.fillText(ch, -chw / 2, 0)
+            context.fillText(ch, 0, 0)
             context.restore()
+            x += chw
         }
         context.restore()
     }
