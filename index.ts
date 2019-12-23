@@ -171,6 +171,30 @@ class JTBNode {
             return curr
         }
         cb()
-        return this 
+        return this
+    }
+}
+
+class JumpyBouncyText {
+
+    root : JTBNode = new JTBNode(0)
+    curr : JTBNode = this.root
+    dir : number = 1
+
+    draw(context : CanvasRenderingContext2D) {
+        this.root.draw(context)
+    }
+
+    update(cb : Function) {
+        this.curr.update(() => {
+            this.curr = this.curr.getNext(this.dir, () => {
+                this.dir *= -1
+            })
+            cb()
+        })
+    }
+
+    startUpdating(cb : Function) {
+        this.curr.startUpdating(cb)
     }
 }
